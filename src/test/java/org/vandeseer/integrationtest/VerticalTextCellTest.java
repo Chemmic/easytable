@@ -11,10 +11,13 @@ import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.junit.Before;
 import org.junit.Test;
 import org.vandeseer.TestUtils;
+import org.vandeseer.easytable.settings.VerticalAlignment;
 import org.vandeseer.easytable.structure.Row;
 import org.vandeseer.easytable.structure.Table;
 import org.vandeseer.easytable.structure.cell.AbstractCell;
 import org.vandeseer.easytable.structure.cell.ImageCell;
+import org.vandeseer.easytable.structure.cell.RotateTextCell;
+import org.vandeseer.easytable.structure.cell.RotateTextCell.Angle;
 import org.vandeseer.easytable.structure.cell.TextCell;
 import org.vandeseer.easytable.structure.cell.VerticalTextCell;
 
@@ -76,15 +79,15 @@ public class VerticalTextCellTest {
 
         tableBuilder
                 .addRow(Row.builder()
-                        .add(VerticalTextCell.builder().minHeight(80f).borderWidth(1).text("This is a super long text that does not fit in one line").build())
-                        .add(VerticalTextCell.builder().borderWidth(1).text("Two").build())
-                        .add(VerticalTextCell.builder().rowSpan(2).borderWidth(1).text("This is again a very long text that will break at one point :)").build())
-                        .add(VerticalTextCell.builder().borderWidth(1).text("Four").build())
+                        .add(RotateTextCell.builder().angle(Angle.BOTTOMTOTOP).verticalAlignment(VerticalAlignment.MIDDLE).minHeight(80f).borderWidth(1).text("This is a super long text that does not fit in one line").build())
+                        .add(RotateTextCell.builder().angle(Angle.TOPTOBOTTOM).verticalAlignment(VerticalAlignment.MIDDLE).borderWidth(1).text("Two").build())
+                        .add(RotateTextCell.builder().angle(Angle.RIGHTTOLEFT).rowSpan(2).borderWidth(1).text("This is again a very long text that will break at one point :)").build())
+                        .add(RotateTextCell.builder().borderWidth(1).text("Four").build())
                         .build())
                 .addRow(Row.builder()
                         .add(TextCell.builder().borderWidth(1).text("One 1\nFubarbar").build())
                         .add(TextCell.builder().borderWidth(1).text("Abc").build())
-                        .add(VerticalTextCell.builder().borderWidth(1).text("Four").build())
+                        .add(RotateTextCell.builder().borderWidth(1).text("Four").build())
                         .build());
 
         return tableBuilder.build();
